@@ -11,11 +11,43 @@ import AWS from 'aws-sdk';
 
 const app = express();
 dotenv.config();
+
+const allowedOrigins = [
+    "http://localhost:3000",
+    "https://socialshelf.vercel.app",
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Allow requests from allowed origins or no origin (e.g., Postman)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: [
+        'Content-Type', 
+        'Origin', 
+        'X-Requested-With', 
+        'Accept', 
+        'Authorization', 
+        'x-client-key', 
+        'x-client-token', 
+        'x-client-secret'
+    ],
+    credentials: true
+};
+
+// Use the CORS middleware with the defined options
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use(bodyParser.json({ extended: 'true', limit: '30mb' }));
 app.use(bodyParser.urlencoded({ extended: 'true', limit: '30mb' }));
-app.use(cors());
+
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
