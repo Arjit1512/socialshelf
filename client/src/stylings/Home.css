@@ -1,0 +1,135 @@
+body {
+    background-color: #3C3D37;
+    color: #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .home-container {
+    max-width: 650px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .create-post {
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .file-input,
+  .description-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: #2a2a2a;
+    color: #ffffff;
+  }
+  
+  .post-button {
+    width: 100%;
+    padding: 10px;
+    background: #bb86fc;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .feed {
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .post {
+    background: #252525;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  .post h2{
+    text-align: left;
+    color:'white';
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+  .flex-row{
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+  }
+  .post-dp {
+    width: 40px;
+    height:40px;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+  .post-image {
+    width: 555px;
+    height:555px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .post-description {
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .no-posts {
+    text-align: center;
+    color: #bbb;
+  }
+  /*FRIEND-SECTION*/
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .feed {
+    width: 100%;
+  }
+  
+  .users-section {
+    width: 25%;
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    height: max-content;
+    position: absolute;
+    bottom: 60%;
+    left: 73%;
+    color: black;
+  }
+  
+  .user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .user-dp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .add-friend-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #007bff;
+  }
+  
