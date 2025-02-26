@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../stylings/Home.css';
 import axios from 'axios';
 import { FaUserPlus } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const userId = localStorage.getItem('userId');
@@ -10,6 +11,8 @@ const Home = () => {
   const [description, setDescription] = useState('');
   const [flagarray, setFlagarray] = useState([]);
   const [entireObject, setEntireObject] = useState({});
+  const [companies, setCompanies] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFeed = async () => {
@@ -36,6 +39,24 @@ const Home = () => {
       }
     };
     getUsers();
+
+    const getCompanies = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/companies`);
+        const compsObject = response.data.reduce((acc, comp) => {
+          acc[comp._id] = comp;
+          return acc;
+        }, {});
+
+        setCompanies(compsObject);
+      } catch (error) {
+        console.error('Error fetching companies:', error);
+      }
+    };
+    getCompanies();
+
+
+
   }, [userId, flagarray]);
 
   const handleCreatePost = async (e) => {
@@ -61,9 +82,16 @@ const Home = () => {
   const handleAddFriend = async (friendId) => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/${userId}/addFriend/${friendId}`);
+      if(response.data.message===" Already friends!"){
+        const response2 = await axios.post(`${process.env.REACT_APP_API_URL}/${userId}/removeFriend/${friendId}`);
+        alert(response2.data.message);
+        setFlagarray((prevarray) => [...prevarray, 1]);
+        return;
+      }
       alert(response.data.message);
       setFlagarray((prevarray) => [...prevarray, 1]);
       
+
     } catch (error) {
       console.error('Error adding friend:', error);
     }
@@ -112,8 +140,23 @@ const Home = () => {
             </div>
           ))}
         </div>
+
+        {/* Companies Section */}
+        <div className="users-section sec2">
+          <h2>Companies</h2>
+          {Object.values(companies).map(company => (
+            <div key={company._id} className="user-item">
+              <img className="user-dp" src={company.dp} alt="Company Logo" />
+              <span>{company.userName}</span>
+              <button className="add-friend-button" onClick={() => navigate(`/company/${company._id}`)}>
+                View
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
+
   );
 };
 

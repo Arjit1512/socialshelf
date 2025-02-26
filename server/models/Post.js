@@ -13,7 +13,25 @@ const postSchema = new mongoose.Schema(
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
-        }
+        },
+        companyId:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Company'
+        },
+        reviews: [
+            {
+                userId: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'User',
+                    required: true
+                },
+                review: {
+                    type: String,
+                    required: true
+                }
+            }
+        ]
 
 
     }

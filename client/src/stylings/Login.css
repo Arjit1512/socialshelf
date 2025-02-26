@@ -113,3 +113,34 @@
     color: #ffffff;
     text-decoration: underline;
 }
+
+.toggle-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    gap: 40px;
+}
+
+.toggle-option {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding-bottom: 5px;
+    position: relative;
+    color: grey;
+}
+
+.toggle-option.active {
+    color: lightgray;
+}
+
+.toggle-option.active::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
